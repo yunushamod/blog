@@ -28,7 +28,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG"), 0)
+DEBUG = int(os.getenv("DEBUG", 0))
 
 
 # Application definition
