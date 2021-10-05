@@ -1,0 +1,53 @@
+{% load blog_tags %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>{% block title %}Yunus' Blog{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <style>
+            a{
+                text-decoration: solid;
+                color: aqua;
+            }
+        </style>
+    </head>
+    <body class="bg-dark text-white">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.level_tag}}" role="alert">
+                    {{message.message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="container">
+            <h1><i><a href="{% url 'blog:list' %}">Yunus's Space</a></i></h1>
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                
+                {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <p class="h1"><i><a href="{% url 'blog:feed' %}">i</a></i></p>
+                {% block sidebar %}
+                {% endblock %} 
+            </div>
+        </div>
+        </div>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script>
+            let inputs = document.querySelectorAll('input');
+            for(let input of inputs){
+                if(!(input.type=="file")){
+                    input.className = 'form-control mb-2';
+                }
+            }
+            let textarea = document.querySelectorAll("textarea");
+            for(let i of textarea){
+                i.className = 'form-control';
+            }
+        </script>
+    </body>
+</html>

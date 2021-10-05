@@ -1,0 +1,73 @@
+{% extends "base.html" %} 
+{% load blog_tags %}
+{% block title %}Yunus's Space{% endblock %}
+{% block content %}
+    <div class="p-3 mt-4 mb-4">
+        <div class="row">
+        {% for post in posts %}
+        <div class="col">
+            <div class="card bg-dark">
+                <img class="card-img-top" src="{{post.image_url}}" >
+                <div class="card-body">
+                    <div class="card-title"><i><span class="h4"><a href="{{post.get_absolute_url}}">{{post.title}}</a></span> published on {{post.publish|date:"DATE_FORMAT"}}</i></div>
+                    <div class="card-body">{% autoescape off %}{{post.body|truncatewords:20}}{% endautoescape %}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+    <nav aria-label="Navigation tab">
+        <ul class="pagination pagination-lg justify-content-center">
+            <li 
+            {% if page.has_previous %} class="page-item"
+            {% else %} class="page-item disabled" {% endif %}>
+                <a class='page-link' aria-label="previous"
+                href="?page={{page.previous_page_number}}">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=1">
+                    <span>1</span>
+                </a>
+            </li>
+            
+            <li class="page-item">
+                <a class="page-link" href="?page=2">
+                    <span>2</span>
+                </a>
+            </li>
+            
+            <li class="page-item">
+                <a class="page-link" href="?page=3">
+                    <span>3</span>
+                </a>
+            </li>
+            <li 
+            {% if page.has_next %} class="page-item"
+            {% else %} class="page-item disabled" {% endif %}>
+                <a class='page-link' aria-label="previous"
+                href="?page={{page.next_page_number}}">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block sidebar %} 
+<h2 class="h3 mb-5">Latest posts:</h2>
+{% show_latest_posts %}
+<h2 class="h3 mb-3 mt-5">
+    Trending
+</h2>
+{% get_most_commented_posts as most_commented %}
+{% for post in most_commented %}
+<ul>
+    <li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+</ul>
+{% endfor %}
+{% endblock %} 
+
+
