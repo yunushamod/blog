@@ -145,8 +145,8 @@ if ENV == 'production':
     DATABASES = {
         'default':{
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': config('DB_NAME', default='')
-            'PASSWORD': config('DB_PASSWORD', default='')
+            'NAME': config('DB_NAME', default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': 'localhost',
             'PORT': '',
         }
